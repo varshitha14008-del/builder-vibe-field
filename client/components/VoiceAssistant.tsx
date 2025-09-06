@@ -25,7 +25,7 @@ export function VoiceAssistant() {
 
   function startListening() {
     // @ts-ignore
-    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SR) {
       setError("Speech recognition not supported in this browser.");
       return;
@@ -91,7 +91,7 @@ export function VoiceAssistant() {
         {results.map(r => (
           <li key={r.id} className="rounded-lg border border-border bg-background p-3">
             <div className="font-semibold">{r.name}</div>
-            <div className="text-xs text-foreground/70">{r.tags?.name:undefined} {r.distance!=null?`• ${prettyDistance(r.distance)}`:null}</div>
+            <div className="text-xs text-foreground/70">{r.distance!=null?`Distance: ${prettyDistance(r.distance)}`:null}</div>
           </li>
         ))}
       </ul>
