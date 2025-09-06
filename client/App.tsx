@@ -13,12 +13,14 @@ import Placeholder from "./pages/Placeholder";
 import MapPage from "./pages/Map";
 import ToursPage from "./pages/Tours";
 import { ApiConfigProvider } from "@/context/ApiConfigContext";
+import { I18nProvider } from "@/context/I18nContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <ApiConfigProvider>
-    <QueryClientProvider client={queryClient}>
+    <I18nProvider>
+      <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
@@ -37,7 +39,8 @@ const App = () => (
           </Layout>
         </BrowserRouter>
       </TooltipProvider>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </I18nProvider>
   </ApiConfigProvider>
 );
 
