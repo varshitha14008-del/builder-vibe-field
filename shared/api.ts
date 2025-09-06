@@ -4,9 +4,44 @@
  * and/or small pure JS functions that can be used on both client and server
  */
 
-/**
- * Example response type for /api/demo
- */
 export interface DemoResponse {
   message: string;
+}
+
+export interface Monastery {
+  id: string;
+  name: string;
+  district?: string;
+  founded?: string;
+  lat?: number;
+  lng?: number;
+  heroImageUrl?: string;
+}
+
+export interface Tour {
+  id: string;
+  monasteryId: string;
+  title: string;
+  languageCodes: string[]; // e.g., ['en','hi','ne','bo']
+  previewImageUrl?: string;
+}
+
+export interface ArchiveItem {
+  id: string;
+  title: string;
+  type: "manuscript" | "mural" | "thangka" | "audio" | "video" | "photo" | "document";
+  monasteryId?: string;
+  thumbnailUrl?: string;
+}
+
+export interface CulturalEvent {
+  id: string;
+  title: string;
+  dateISO: string; // YYYY-MM-DD
+  location?: string;
+}
+
+export interface Paginated<T> {
+  items: T[];
+  total: number;
 }
