@@ -1,8 +1,15 @@
 import { PropsWithChildren } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Facebook, Github, Globe2, Headphones, Library, MapPinned, Video, Calendar } from "lucide-react";
+import { Facebook, Github, Globe2, Headphones, Library, MapPinned, Video, Calendar, Settings } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { cn } from "@/lib/utils";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { useApiConfig } from "@/context/ApiConfigContext";
 
 const navItems = [
   { to: "/tours", label: "Virtual Tours", icon: Video },
