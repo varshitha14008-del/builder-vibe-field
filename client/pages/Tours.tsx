@@ -17,6 +17,12 @@ export default function ToursPage() {
   const viewerRef = useRef<any>(null);
 
   useEffect(() => {
+    // Inject CSS from CDN (allowlisted)
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://unpkg.com/pannellum@2.5.6/build/pannellum.css";
+    document.head.appendChild(link);
+
     if (!containerRef.current || !window.pannellum) return;
     if (viewerRef.current) {
       viewerRef.current.loadScene(current.id, { panorama: current.url });
@@ -30,6 +36,9 @@ export default function ToursPage() {
       showZoomCtrl: true,
       keyboardZoom: true,
     });
+    return () => {
+      document.head.removeChild(link);
+    };
   }, [current]);
 
   return (
