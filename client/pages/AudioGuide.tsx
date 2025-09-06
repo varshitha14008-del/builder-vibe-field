@@ -11,6 +11,7 @@ export default function AudioGuidePage() {
   const { data: tours } = useTours();
   const [selectedId, setSelectedId] = useState<string | undefined>(undefined);
   const [nowPlaying, setNowPlaying] = useState<string | undefined>(undefined);
+  const [error, setError] = useState<string | undefined>(undefined);
 
   const list = monasteries?.items || [];
   const nearestLabel = "Auto-select by location";
@@ -47,6 +48,13 @@ export default function AudioGuidePage() {
   }
 
   const currentTrack = tracksFor(selectedId, lang)[0] ?? tracksFor(selectedId)[0];
+  useEffect(() => { setError(undefined); }, [selectedId, lang]);
+  useEffect(() => {
+    if ('mediaSession' in navigator && currentTrack) {
+      // @ts-ignore
+      navigator.mediaSession.metadata = new window.MediaMetadata({ title: currentTrack.title, artist: "Monastery360", album: selectedId });
+    }
+  }, [currentTrack, selectedId]);
 
   return (
     <section className="container mx-auto px-4 py-8">
@@ -89,8 +97,9 @@ export default function AudioGuidePage() {
             <div className="text-sm font-semibold">Now Playing</div>
             <div className="mt-2 text-lg font-semibold">{currentTrack?.title ?? "No track available"}</div>
             <div className="mt-4">
-              <audio controls className="w-full" src={currentTrack?.url} onPlay={()=> setNowPlaying(currentTrack?.url)} />
+              <audio controls preload="metadata" className="w-full" src={currentTrack?.url} onPlay={()=> { setError(undefined); setNowPlaying(currentTrack?.url); }} onError={()=> setError("Failed to load audio. Check your connection.")} />
             </div>
+            {error && (<div className="mt-2 text-sm text-destructive">{error}</div>)}
             {currentTrack?.url ? (
               <div className="mt-3 text-sm text-foreground/70">
                 <a href={currentTrack.url} download className="text-primary hover:underline">Download for offline use</a>
@@ -101,15 +110,14 @@ export default function AudioGuidePage() {
 
         <aside className="lg:col-span-4 space-y-4">
           <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
-            <div className="text-sm font-semibold mb-2">Available Tracks</div>
-            <ul className="space-y-2 text-sm">
-              {tracksFor(selectedId)?.map(t => (
-                <li key={t.monasteryId + t.lang} className="flex items-center justify-between">
-                  <span>{t.title}</span>
-                  <Button size="sm" variant="ghost" onClick={()=> setLang(t.lang)}>Set {t.lang.toUpperCase()}</Button>
-                </li>
+            <div className="text-sm font-semibold mb-2">Languages</div>
+            <div className="flex flex-wrap gap-2">
+              {availableLangs.map((code)=> (
+                <Button key={code} size="sm" variant={code===lang?"default":"outline"} onClick={()=> setLang(code)}>
+                  {code.toUpperCase()}
+                </Button>
               ))}
-            </ul>
+            </div>
           </div>
 
           <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
