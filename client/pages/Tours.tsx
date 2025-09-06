@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import "pannellum/build/pannellum.css";
 import "pannellum/build/pannellum.js";
 import { useTours } from "@/hooks/api";
 import { Button } from "@/components/ui/button";
