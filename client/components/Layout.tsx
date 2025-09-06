@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { useApiConfig } from "@/context/ApiConfigContext";
 import { useMonasteries } from "@/hooks/api";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 const navItems = [
   { to: "/tours", label: "Virtual Tours", icon: Video },
