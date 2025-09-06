@@ -7,7 +7,7 @@ export function Logo({ className = "" }: { className?: string }) {
       <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
         <Sparkles className="h-5 w-5" aria-hidden />
       </span>
-      <span className="text-lg font-extrabold tracking-tight">Monastery360</span>
+      <span className="block text-[18px] leading-7 font-extrabold tracking-[-0.45px]"><p>Monastery360</p></span>
     </Link>
   );
 }
