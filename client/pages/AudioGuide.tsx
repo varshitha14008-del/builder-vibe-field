@@ -60,12 +60,13 @@ export default function AudioGuidePage() {
   return (
     <section className="container mx-auto px-4 py-8">
       <div className="mb-6 text-center">
-        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">Audio Guide</h1>
-        <p className="mt-2 text-foreground/70">Location-aware, multi-language audio. Use GPS to auto-select a monastery.</p>
+        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">Audio Assistant</h1>
+        <p className="mt-2 text-foreground/70">Ask for monasteries, hotels, food, or attractions near you or in any Sikkim location. Supports many Indian languages.</p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-12">
         <div className="lg:col-span-8 space-y-4">
+          <VoiceAssistant />
           <div className="rounded-2xl border border-border bg-card p-4 shadow-sm">
             <div className="flex flex-wrap items-center gap-3">
               <Select value={selectedId} onValueChange={setSelectedId}>
@@ -95,7 +96,7 @@ export default function AudioGuidePage() {
           </div>
 
           <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
-            <div className="text-sm font-semibold">Now Playing</div>
+            <div className="text-sm font-semibold">Optional Monastery Narration</div>
             <div className="mt-2 text-lg font-semibold">{currentTrack?.title ?? "No track available"}</div>
             <div className="mt-4">
               <audio controls preload="metadata" className="w-full" src={currentTrack?.url} onPlay={()=> { setError(undefined); setNowPlaying(currentTrack?.url); }} onError={()=> setError("Failed to load audio. Check your connection.")} />
