@@ -2,6 +2,10 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
+import { handleGetMonasteries } from "./routes/monasteries";
+import { handleGetTours } from "./routes/tours";
+import { handleGetArchives } from "./routes/archives";
+import { handleGetEvents } from "./routes/events";
 
 export function createServer() {
   const app = express();
@@ -18,6 +22,12 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
+
+  // Monastery360 APIs
+  app.get("/api/monasteries", handleGetMonasteries);
+  app.get("/api/tours", handleGetTours);
+  app.get("/api/archives", handleGetArchives);
+  app.get("/api/events", handleGetEvents);
 
   return app;
 }
