@@ -8,8 +8,10 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { useApiConfig } from "@/context/ApiConfigContext";
+import { useMonasteries } from "@/hooks/api";
 
 const navItems = [
   { to: "/tours", label: "Virtual Tours", icon: Video },
@@ -44,6 +46,7 @@ export function Layout({ children }: PropsWithChildren) {
             ))}
           </nav>
           <div className="flex items-center gap-2">
+            <ConnectionStatus />
             <Link to="/map" className="hidden sm:inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
               Explore Map
             </Link>
@@ -85,6 +88,15 @@ export function Layout({ children }: PropsWithChildren) {
       </footer>
     </div>
   );
+}
+
+function ConnectionStatus() {
+  const { config } = useApiConfig();
+  const q = useMonasteries();
+  if (config.useMock) return <Badge variant="secondary">Mock Data</Badge>;
+  if (q.isSuccess) return <Badge>Connected</Badge>;
+  if (q.isLoading) return <Badge variant="secondary">Checking…</Badge>;
+  return <Badge variant="destructive">Error</Badge>;
 }
 
 function ConnectDataDialog() {
