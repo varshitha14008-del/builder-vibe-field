@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import Placeholder from "./pages/Placeholder";
 import MapPage from "./pages/Map";
 import ToursPage from "./pages/Tours";
+import AudioGuidePage from "./pages/AudioGuide";
 import { ApiConfigProvider } from "@/context/ApiConfigContext";
 import { I18nProvider } from "@/context/I18nContext";
 
@@ -32,7 +33,7 @@ const App = () => (
               <Route path="/map" element={<MapPage />} />
               <Route path="/archives" element={<Placeholder />} />
               <Route path="/calendar" element={<Placeholder />} />
-              <Route path="/audio-guide" element={<Placeholder />} />
+              <Route path="/audio-guide" element={<AudioGuidePage />} />
               {/* Catch-all */}
               <Route path="*" element={<NotFound />} />
             </Routes>
