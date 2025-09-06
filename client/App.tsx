@@ -10,6 +10,8 @@ import { Layout } from "@/components/Layout";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Placeholder from "./pages/Placeholder";
+import MapPage from "./pages/Map";
+import ToursPage from "./pages/Tours";
 import { ApiConfigProvider } from "@/context/ApiConfigContext";
 
 const queryClient = new QueryClient();
@@ -24,8 +26,8 @@ const App = () => (
           <Layout>
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/tours" element={<Placeholder />} />
-              <Route path="/map" element={<Placeholder />} />
+              <Route path="/tours" element={<ToursPage />} />
+              <Route path="/map" element={<MapPage />} />
               <Route path="/archives" element={<Placeholder />} />
               <Route path="/calendar" element={<Placeholder />} />
               <Route path="/audio-guide" element={<Placeholder />} />
