@@ -10,30 +10,33 @@ import { Layout } from "@/components/Layout";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Placeholder from "./pages/Placeholder";
+import { ApiConfigProvider } from "@/context/ApiConfigContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/tours" element={<Placeholder />} />
-            <Route path="/map" element={<Placeholder />} />
-            <Route path="/archives" element={<Placeholder />} />
-            <Route path="/calendar" element={<Placeholder />} />
-            <Route path="/audio-guide" element={<Placeholder />} />
-            {/* Catch-all */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <ApiConfigProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/tours" element={<Placeholder />} />
+              <Route path="/map" element={<Placeholder />} />
+              <Route path="/archives" element={<Placeholder />} />
+              <Route path="/calendar" element={<Placeholder />} />
+              <Route path="/audio-guide" element={<Placeholder />} />
+              {/* Catch-all */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </ApiConfigProvider>
 );
 
 createRoot(document.getElementById("root")!).render(<App />);
