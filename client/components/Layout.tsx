@@ -86,3 +86,46 @@ export function Layout({ children }: PropsWithChildren) {
     </div>
   );
 }
+
+function ConnectDataDialog() {
+  const { config, setConfig } = useApiConfig();
+  const [open, setOpen] = useState(false);
+  const [baseUrl, setBaseUrl] = useState(config.baseUrl);
+  const [apiKey, setApiKey] = useState(config.apiKey || "");
+  const [useMock, setUseMock] = useState(config.useMock);
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="sm"><Settings className="h-4 w-4" /> Connect Data</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Connect your backend</DialogTitle>
+        </DialogHeader>
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="baseUrl">API Base URL</Label>
+            <Input id="baseUrl" placeholder="https://your-api.example.com" value={baseUrl} onChange={(e)=>setBaseUrl(e.target.value)} />
+            <p className="text-xs text-foreground/60">Leave empty and enable Mock Data to use built-in demo data.</p>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="apiKey">API Key (optional)</Label>
+            <Input id="apiKey" placeholder="Paste key if required" value={apiKey} onChange={(e)=>setApiKey(e.target.value)} />
+          </div>
+          <div className="flex items-center justify-between rounded-md border border-border p-3">
+            <div>
+              <div className="text-sm font-medium">Use Mock Data</div>
+              <div className="text-xs text-foreground/60">Shows sample monasteries, tours, archives, and events.</div>
+            </div>
+            <Switch checked={useMock} onCheckedChange={(v)=>setUseMock(!!v)} />
+          </div>
+          <div className="flex justify-end gap-2 pt-2">
+            <Button variant="ghost" onClick={()=>setOpen(false)}>Cancel</Button>
+            <Button onClick={()=>{ setConfig({ baseUrl: baseUrl.trim(), apiKey: apiKey.trim() || undefined, useMock: useMock || !baseUrl.trim() }); setOpen(false); }}>Save</Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
