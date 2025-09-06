@@ -1,12 +1,25 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
-export type LangCode = "en" | "hi" | "ne" | "bo"; // English, Hindi, Nepali, Tibetan (bo)
+export type LangCode =
+  | "en" | "hi" | "ne" | "bo"
+  | "bn" | "mr" | "ta" | "te" | "ml" | "kn" | "gu" | "pa" | "as" | "or" | "ur"; // Indian languages
 
 export const LANGS: { code: LangCode; label: string; native: string }[] = [
   { code: "en", label: "English", native: "English" },
   { code: "hi", label: "Hindi", native: "हिन्दी" },
   { code: "ne", label: "Nepali", native: "नेपाली" },
   { code: "bo", label: "Tibetan", native: "བོད་སྐད་" },
+  { code: "bn", label: "Bengali", native: "বাংলা" },
+  { code: "mr", label: "Marathi", native: "मराठी" },
+  { code: "ta", label: "Tamil", native: "தமிழ்" },
+  { code: "te", label: "Telugu", native: "తెలుగు" },
+  { code: "ml", label: "Malayalam", native: "മലയാളം" },
+  { code: "kn", label: "Kannada", native: "ಕನ್ನಡ" },
+  { code: "gu", label: "Gujarati", native: "ગુજરાતી" },
+  { code: "pa", label: "Punjabi", native: "ਪੰਜਾਬੀ" },
+  { code: "as", label: "Assamese", native: "অসমীয়া" },
+  { code: "or", label: "Odia", native: "ଓଡ଼ିଆ" },
+  { code: "ur", label: "Urdu", native: "اردو" },
 ];
 
 const STORAGE_KEY = "monastery360.lang";
@@ -44,6 +57,7 @@ const translations: Record<LangCode, Record<string, string>> = {
     mockData: "དཔེ་གཞི་",
     connectData: "གཞི་གྲངས་སྦྲེལ་",
   },
+  bn: {}, mr: {}, ta: {}, te: {}, ml: {}, kn: {}, gu: {}, pa: {}, as: {}, or: {}, ur: {},
 };
 
 interface Ctx {
