@@ -3,7 +3,7 @@ import type { LangCode } from "@/context/I18nContext";
 export type AudioTrack = { monasteryId: string; lang: LangCode; title: string; url: string };
 
 // Small public domain/sample audio clips for demo
-const SAMPLE = "https://samplelib.com/lib/preview/mp3/sample-3s.mp3";
+const SAMPLE = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
 
 export const audioTracks: AudioTrack[] = [
   { monasteryId: "rumtek", lang: "en", title: "Rumtek Intro (EN)", url: SAMPLE },
