@@ -4,6 +4,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { useMonasteries, useTours } from "@/hooks/api";
 import { audioTracks } from "@/data/audio";
 import { useI18n, LANGS, type LangCode } from "@/context/I18nContext";
+import { VoiceAssistant } from "@/components/VoiceAssistant";
 
 export default function AudioGuidePage() {
   const { lang, setLang } = useI18n();
