@@ -1,0 +1,11 @@
+[
+  { "id": "rumtek-en", "monasteryId": "rumtek", "title": "Rumtek 360° Tour", "languageCodes": ["en","hi","ne","bo"], "previewImageUrl": null, "panoramaUrl": null },
+  { "id": "pemayangtse-en", "monasteryId": "pemayangtse", "title": "Pemayangtse 360° Tour", "languageCodes": ["en","hi","ne","bo"], "previewImageUrl": null, "panoramaUrl": null },
+  { "id": "enchey-en", "monasteryId": "enchey", "title": "Enchey 360° Tour", "languageCodes": ["en","hi","ne","bo"], "previewImageUrl": null, "panoramaUrl": null },
+  { "id": "tashiding-en", "monasteryId": "tashiding", "title": "Tashiding 360° Tour", "languageCodes": ["en","hi","ne","bo"], "previewImageUrl": null, "panoramaUrl": null },
+  { "id": "ralang-en", "monasteryId": "ralang", "title": "Ralang 360° Tour", "languageCodes": ["en","hi","ne","bo"], "previewImageUrl": null, "panoramaUrl": null },
+  { "id": "phodong-en", "monasteryId": "phodong", "title": "Phodong 360° Tour", "languageCodes": ["en","hi","ne","bo"], "previewImageUrl": null, "panoramaUrl": null },
+  { "id": "phensang-en", "monasteryId": "phensang", "title": "Phensang 360° Tour", "languageCodes": ["en","hi","ne","bo"], "previewImageUrl": null, "panoramaUrl": null },
+  { "id": "lingdum-en", "monasteryId": "lingdum", "title": "Lingdum (Ranka) 360° Tour", "languageCodes": ["en","hi","ne","bo"], "previewImageUrl": null, "panoramaUrl": null },
+  { "id": "dubdi-en", "monasteryId": "dubdi", "title": "Dubdi 360° Tour", "languageCodes": ["en","hi","ne","bo"], "previewImageUrl": null, "panoramaUrl": null }
+]
