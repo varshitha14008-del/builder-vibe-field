@@ -56,7 +56,7 @@ export default function ToursPage() {
     if (!scenes.length) return;
     containerRef.current.innerHTML = "";
     const sceneMap: Record<string, any> = {};
-    for (const s of scenes) sceneMap[s.id] = { type: "equirectangular", panorama: s.url, pitch: 0, yaw: 0, hfov: 100 };
+    for (const s of scenes) sceneMap[s.id] = { type: "equirectangular", panorama: s.url, pitch: 0, yaw: 0, hfov: 100, crossOrigin: "anonymous" };
     const first = currentId || scenes[0]?.id;
     setCurrentId(first || "");
     viewerRef.current = window.pannellum.viewer(containerRef.current, {
