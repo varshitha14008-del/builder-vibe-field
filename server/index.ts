@@ -26,6 +26,7 @@ export function createServer() {
   // Monastery360 APIs
   app.get("/api/monasteries", handleGetMonasteries);
   app.get("/api/tours", handleGetTours);
+  app.put("/api/tours/:id/panorama", require("./routes/tours").handleSetTourPanorama);
   app.get("/api/archives", handleGetArchives);
   app.get("/api/events", handleGetEvents);
 
