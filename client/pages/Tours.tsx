@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { api } from "@/lib/api";
+import { Label } from "@/components/ui/label";
 
 declare global { interface Window { pannellum: any } }
 
@@ -24,6 +25,7 @@ export default function ToursPage() {
   const [newUrl, setNewUrl] = useState("");
   const [newTitle, setNewTitle] = useState("");
   const [assignTourId, setAssignTourId] = useState<string | undefined>(undefined);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // Load scenes from server tours + localStorage override
   useEffect(() => {
@@ -114,7 +116,7 @@ export default function ToursPage() {
           </div>
 
           <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
-            <div className="text-sm font-semibold mb-2">Add Sikkim 360 URL</div>
+            <div className="text-sm font-semibold mb-2">Add Sikkim 360 URL or Upload</div>
             <div className="space-y-2">
               <Select value={assignTourId} onValueChange={setAssignTourId}>
                 <SelectTrigger className="w-full"><SelectValue placeholder="Select tour" /></SelectTrigger>
@@ -128,6 +130,16 @@ export default function ToursPage() {
               </Select>
               <Input placeholder="https://.../your-360.jpg" value={newUrl} onChange={(e)=> setNewUrl(e.target.value)} />
               <Input placeholder="Title (e.g., Rumtek Courtyard)" value={newTitle} onChange={(e)=> setNewTitle(e.target.value)} />
+              <div className="flex items-center gap-2">
+                <input ref={fileInputRef} type="file" accept="image/*" onChange={(e)=> {
+                  const f = e.target.files?.[0];
+                  if (!f) return;
+                  const reader = new FileReader();
+                  reader.onload = () => { setNewUrl(String(reader.result||"")); if (!newTitle) setNewTitle(f.name.replace(/\.[^.]+$/, "")); };
+                  reader.readAsDataURL(f);
+                }} />
+                <Label className="text-xs text-foreground/70">Upload a 2:1 equirectangular JPG</Label>
+              </div>
               <Button onClick={addScene} disabled={!newUrl.trim() || !assignTourId}>Attach to tour</Button>
             </div>
             {current ? <div className="mt-3 text-xs text-foreground/70">Viewing: {current.title}</div> : null}
