@@ -24,6 +24,7 @@ export interface Tour {
   title: string;
   languageCodes: string[]; // e.g., ['en','hi','ne','bo']
   previewImageUrl?: string;
+  panoramaUrl?: string; // equirectangular 2:1 panorama URL
 }
 
 export interface ArchiveItem {
