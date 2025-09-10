@@ -4,6 +4,7 @@ import { useTours } from "@/hooks/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { api } from "@/lib/api";
 
 declare global { interface Window { pannellum: any } }
 
@@ -13,7 +14,7 @@ type Stored = Record<string, { title: string; url: string }>;
 const LS_KEY = "monastery360_tour_scenes";
 
 export default function ToursPage() {
-  const { data } = useTours();
+  const { data, refetch } = useTours();
   const tours = useMemo(() => data?.items || [], [data]);
 
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -24,13 +25,21 @@ export default function ToursPage() {
   const [newTitle, setNewTitle] = useState("");
   const [assignTourId, setAssignTourId] = useState<string | undefined>(undefined);
 
-  // Load saved scenes mapped to tours
+  // Load scenes from server tours + localStorage override
   useEffect(() => {
     const raw = localStorage.getItem(LS_KEY);
     const stored: Stored = raw ? JSON.parse(raw) : {};
     const fromStored: Scene[] = Object.entries(stored).map(([tourId, v]) => ({ id: tourId, title: v.title, url: v.url }));
-    setScenes(fromStored);
-    if (fromStored[0]) setCurrentId(fromStored[0].id);
+    const fromServer: Scene[] = tours
+      .filter((t: any) => t.panoramaUrl)
+      .map((t: any) => ({ id: t.id, title: t.title, url: t.panoramaUrl as string }));
+    // Merge, local stored takes precedence
+    const map = new Map<string, Scene>();
+    for (const s of fromServer) map.set(s.id, s);
+    for (const s of fromStored) map.set(s.id, s);
+    const merged = Array.from(map.values());
+    setScenes(merged);
+    if (merged[0]) setCurrentId(merged[0].id);
     if (!assignTourId && tours[0]) setAssignTourId(tours[0].id);
   }, [tours]);
 
@@ -60,18 +69,17 @@ export default function ToursPage() {
 
   const current = scenes.find((s) => s.id === currentId);
 
-  function addScene() {
+  async function addScene() {
     const url = newUrl.trim();
     const title = newTitle.trim() || (tours.find(t => t.id === assignTourId)?.title || "Custom 360");
     const tourId = assignTourId || "custom";
     if (!url) return;
+    await api.setTourPanorama(tourId, { panoramaUrl: url, title });
+    await refetch();
     const storedRaw = localStorage.getItem(LS_KEY);
     const stored: Stored = storedRaw ? JSON.parse(storedRaw) : {};
     stored[tourId] = { title, url };
     localStorage.setItem(LS_KEY, JSON.stringify(stored));
-    const nextScenes: Scene[] = Object.entries(stored).map(([tid, v]) => ({ id: tid, title: v.title, url: v.url }));
-    setScenes(nextScenes);
-    setCurrentId(tourId);
     setNewUrl("");
     setNewTitle("");
   }
