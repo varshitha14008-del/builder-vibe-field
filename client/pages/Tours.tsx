@@ -1,73 +1,51 @@
-import { useEffect, useRef, useState } from "react";
-import "pannellum/build/pannellum.js";
+import { useMemo } from "react";
 import { useTours } from "@/hooks/api";
 import { Button } from "@/components/ui/button";
-
-declare global { interface Window { pannellum: any } }
-
-const DEMO_PANOS = [
-  { id: "alma", title: "Sample • Alma Observatory", url: "https://pannellum.org/images/alma.jpg" },
-  { id: "cerro", title: "Sample • Cerro Toco", url: "https://pannellum.org/images/cerro-toco-0.jpg" },
-];
+import { Link } from "react-router-dom";
 
 export default function ToursPage() {
   const { data } = useTours();
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const [current, setCurrent] = useState(DEMO_PANOS[0]);
-  const viewerRef = useRef<any>(null);
-
-  useEffect(() => {
-    // Inject CSS from CDN (allowlisted)
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "https://unpkg.com/pannellum@2.5.6/build/pannellum.css";
-    document.head.appendChild(link);
-
-    if (!containerRef.current || !window.pannellum) return;
-    if (viewerRef.current) {
-      viewerRef.current.loadScene(current.id, { panorama: current.url });
-      return;
-    }
-    viewerRef.current = window.pannellum.viewer(containerRef.current, {
-      default: { firstScene: current.id, autoLoad: true },
-      scenes: Object.fromEntries(
-        DEMO_PANOS.map((p) => [p.id, { type: "equirectangular", panorama: p.url, pitch: 0, yaw: 0, hfov: 100 }]),
-      ),
-      showZoomCtrl: true,
-      keyboardZoom: true,
-    });
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, [current]);
+  const tours = useMemo(() => data?.items || [], [data]);
 
   return (
     <section className="container mx-auto px-4 py-8">
       <div className="mb-4 text-center">
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">Virtual Tours</h1>
-        <p className="mt-2 text-foreground/70">360° panoramic walkthroughs with narration (sample content shown).</p>
+        <p className="mt-2 text-foreground/70">Sikkim monasteries showcase. 360° panoramas will appear here as assets are added.</p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-12">
-        <div className="lg:col-span-9 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-          <div ref={containerRef} className="h-[70vh] w-full" />
-        </div>
-        <aside className="lg:col-span-3 space-y-4">
-          <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
-            <div className="text-sm font-semibold mb-2">Available Tours</div>
-            <div className="space-y-2">
-              {DEMO_PANOS.map((p) => (
-                <Button key={p.id} variant={p.id === current.id ? "default" : "outline"} className="w-full justify-start" onClick={() => setCurrent(p)}>
-                  {p.title}
-                </Button>
-              ))}
+        <div className="lg:col-span-8 space-y-4">
+          <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+            <div className="text-lg font-semibold">Sikkim Monasteries</div>
+            <p className="mt-1 text-sm text-foreground/70">Browse the Interactive Map and Audio Assistant while 360° scenes are prepared.</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <Link to="/map"><Button>Open Interactive Map</Button></Link>
+              <Link to="/audio-guide"><Button variant="outline">Open Audio Assistant</Button></Link>
             </div>
           </div>
 
+          <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+            <div className="text-sm font-semibold">Planned 360° Tours</div>
+            <ul className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
+              {tours.map((t) => (
+                <li key={t.id} className="rounded-xl border border-border bg-background p-3">
+                  <div className="font-semibold">{t.title}</div>
+                  <div className="text-xs text-foreground/70">Languages: {t.languageCodes.join(", ").toUpperCase()}</div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <aside className="lg:col-span-4 space-y-4">
           <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
-            <div className="text-sm font-semibold mb-2">Your backend tours</div>
-            <div className="text-xs text-foreground/70">Once your backend returns /tours with panorama URLs, we’ll list them here.</div>
-            <div className="mt-2 text-xs"><span className="font-semibold">Found:</span> {data?.total ?? 0} tours</div>
+            <div className="text-sm font-semibold mb-2">How to contribute 360°</div>
+            <ul className="list-disc pl-5 text-xs text-foreground/70 space-y-1">
+              <li>Capture equirectangular 360° images (2:1) inside monastery courtyards and prayer halls where permitted.</li>
+              <li>Host them on a reliable CDN or upload via CMS, then link them to tours.</li>
+              <li>We’ll render them here with full pan/zoom once available.</li>
+            </ul>
           </div>
         </aside>
       </div>
