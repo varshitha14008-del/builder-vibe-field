@@ -53,7 +53,7 @@ export default function ToursPage() {
     return () => { document.head.removeChild(link); };
   }, []);
 
-  const isYouTube = (url: string) => /youtube\.com|youtu\.be/.test(url);
+  const isIframe = (url: string) => /youtube\.com|youtu\.be|google\.com\/maps\/embed/.test(url);
   const toEmbedUrl = (url: string) => {
     try {
       if (url.includes("youtu.be/")) {
@@ -65,19 +65,20 @@ export default function ToursPage() {
         const id = u.searchParams.get("v");
         if (id) return `https://www.youtube.com/embed/${id}`;
       }
+      if (u.hostname.includes("google.com") && u.pathname.includes("/maps/embed")) return url;
     } catch {}
     return url;
   };
 
   useEffect(() => {
     if (!containerRef.current || !window.pannellum) return;
-    const imageScenes = scenes.filter((s) => !isYouTube(s.url));
+    const imageScenes = scenes.filter((s) => !isIframe(s.url));
     if (!imageScenes.length) return;
     containerRef.current.innerHTML = "";
     const sceneMap: Record<string, any> = {};
     for (const s of imageScenes) sceneMap[s.id] = { type: "equirectangular", panorama: s.url, pitch: 0, yaw: 0, hfov: 100, crossOrigin: "anonymous" };
     const first = imageScenes[0]?.id;
-    if (!currentId || isYouTube(scenes.find(s=>s.id===currentId)?.url || "")) setCurrentId(first || "");
+    if (!currentId || isIframe(scenes.find(s=>s.id===currentId)?.url || "")) setCurrentId(first || "");
     viewerRef.current = window.pannellum.viewer(containerRef.current, {
       default: { firstScene: first, autoLoad: true },
       scenes: sceneMap,
@@ -87,8 +88,8 @@ export default function ToursPage() {
   }, [scenes]);
 
   const current = scenes.find((s) => s.id === currentId) || scenes[0];
-  const currentIsVideo = current ? isYouTube(current.url) : false;
-  const currentEmbed = currentIsVideo ? toEmbedUrl(current!.url) : undefined;
+  const currentIsIframe = current ? isIframe(current.url) : false;
+  const currentEmbed = currentIsIframe ? toEmbedUrl(current!.url) : undefined;
 
   async function addScene() {
     const url = newUrl.trim();
@@ -117,9 +118,9 @@ export default function ToursPage() {
       <div className="grid gap-6 lg:grid-cols-12">
         <div className="lg:col-span-9 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
           {scenes.length ? (
-            currentIsVideo ? (
+            currentIsIframe ? (
               <div className="aspect-video w-full">
-                <iframe className="h-[70vh] w-full" src={currentEmbed} title={current.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+                <iframe className="h-[70vh] w-full" src={currentEmbed} title={current.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen referrerPolicy="no-referrer-when-downgrade" />
               </div>
             ) : (
               <div ref={containerRef} className="h-[70vh] w-full" />
