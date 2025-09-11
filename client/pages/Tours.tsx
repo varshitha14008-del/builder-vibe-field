@@ -53,23 +53,42 @@ export default function ToursPage() {
     return () => { document.head.removeChild(link); };
   }, []);
 
+  const isYouTube = (url: string) => /youtube\.com|youtu\.be/.test(url);
+  const toEmbedUrl = (url: string) => {
+    try {
+      if (url.includes("youtu.be/")) {
+        const id = url.split("youtu.be/")[1].split(/[?&]/)[0];
+        return `https://www.youtube.com/embed/${id}`;
+      }
+      const u = new URL(url);
+      if (u.hostname.includes("youtube.com")) {
+        const id = u.searchParams.get("v");
+        if (id) return `https://www.youtube.com/embed/${id}`;
+      }
+    } catch {}
+    return url;
+  };
+
   useEffect(() => {
     if (!containerRef.current || !window.pannellum) return;
-    if (!scenes.length) return;
+    const imageScenes = scenes.filter((s) => !isYouTube(s.url));
+    if (!imageScenes.length) return;
     containerRef.current.innerHTML = "";
     const sceneMap: Record<string, any> = {};
-    for (const s of scenes) sceneMap[s.id] = { type: "equirectangular", panorama: s.url, pitch: 0, yaw: 0, hfov: 100, crossOrigin: "anonymous" };
-    const first = currentId || scenes[0]?.id;
-    setCurrentId(first || "");
+    for (const s of imageScenes) sceneMap[s.id] = { type: "equirectangular", panorama: s.url, pitch: 0, yaw: 0, hfov: 100, crossOrigin: "anonymous" };
+    const first = imageScenes[0]?.id;
+    if (!currentId || isYouTube(scenes.find(s=>s.id===currentId)?.url || "")) setCurrentId(first || "");
     viewerRef.current = window.pannellum.viewer(containerRef.current, {
       default: { firstScene: first, autoLoad: true },
       scenes: sceneMap,
       showZoomCtrl: true,
       keyboardZoom: true,
     });
-  }, [scenes, currentId]);
+  }, [scenes]);
 
-  const current = scenes.find((s) => s.id === currentId);
+  const current = scenes.find((s) => s.id === currentId) || scenes[0];
+  const currentIsVideo = current ? isYouTube(current.url) : false;
+  const currentEmbed = currentIsVideo ? toEmbedUrl(current!.url) : undefined;
 
   async function addScene() {
     const url = newUrl.trim();
@@ -98,7 +117,13 @@ export default function ToursPage() {
       <div className="grid gap-6 lg:grid-cols-12">
         <div className="lg:col-span-9 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
           {scenes.length ? (
-            <div ref={containerRef} className="h-[70vh] w-full" />
+            currentIsVideo ? (
+              <div className="aspect-video w-full">
+                <iframe className="h-[70vh] w-full" src={currentEmbed} title={current.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+              </div>
+            ) : (
+              <div ref={containerRef} className="h-[70vh] w-full" />
+            )
           ) : (
             <div className="h-[70vh] w-full flex items-center justify-center text-sm text-foreground/70">No 360° added yet. Use the form to attach panoramas to tours.</div>
           )}
