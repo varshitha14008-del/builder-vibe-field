@@ -36,7 +36,7 @@ const App = () => (
               <Route path="/map" element={<MapPage />} />
               <Route path="/monasteries" element={<MonasteriesPage />} />
               <Route path="/archives" element={<ArchivesPage />} />
-              <Route path="/calendar" element={<Placeholder />} />
+              <Route path="/calendar" element={<CalendarPage />} />
               <Route path="/audio-guide" element={<AudioGuidePage />} />
               {/* Catch-all */}
               <Route path="*" element={<NotFound />} />
