@@ -17,6 +17,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 const navItems = [
   { to: "/tours", label: "Virtual Tours", icon: Video },
   { to: "/map", label: "Interactive Map", icon: MapPinned },
+  { to: "/monasteries", label: "Monasteries", icon: Video },
   { to: "/archives", label: "Digital Archives", icon: Library },
   { to: "/calendar", label: "Cultural Calendar", icon: Calendar },
   { to: "/audio-guide", label: "Audio Guide", icon: Headphones },
