@@ -11,6 +11,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Placeholder from "./pages/Placeholder";
 import ArchivesPage from "./pages/Archives";
+import CalendarPage from "./pages/Calendar";
 import MapPage from "./pages/Map";
 import ToursPage from "./pages/Tours";
 import AudioGuidePage from "./pages/AudioGuide";
