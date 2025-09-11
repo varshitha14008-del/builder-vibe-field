@@ -14,6 +14,7 @@ import ArchivesPage from "./pages/Archives";
 import MapPage from "./pages/Map";
 import ToursPage from "./pages/Tours";
 import AudioGuidePage from "./pages/AudioGuide";
+import MonasteriesPage from "./pages/Monasteries";
 import { ApiConfigProvider } from "@/context/ApiConfigContext";
 import { I18nProvider } from "@/context/I18nContext";
 
