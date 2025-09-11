@@ -26,8 +26,8 @@ export default function ArchivesPage() {
   const { data: monasteries } = useMonasteries();
 
   const [q, setQ] = useState("");
-  const [type, setType] = useState<string>("");
-  const [mon, setMon] = useState<string>("");
+  const [type, setType] = useState<string>("all");
+  const [mon, setMon] = useState<string>("all");
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<ArchiveItem | null>(null);
 
@@ -38,8 +38,8 @@ export default function ArchivesPage() {
     const query = q.trim().toLowerCase();
     return items.filter((it) => {
       const okQ = !query || it.title.toLowerCase().includes(query);
-      const okT = !type || it.type === type;
-      const okM = !mon || it.monasteryId === mon;
+      const okT = type === "all" || it.type === type;
+      const okM = mon === "all" || it.monasteryId === mon;
       return okQ && okT && okM;
     });
   }, [items, q, type, mon]);
@@ -59,7 +59,7 @@ export default function ArchivesPage() {
           <SelectTrigger className="md:col-span-3"><SelectValue placeholder="Type (All)" /></SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="">All</SelectItem>
+              <SelectItem value="all">All</SelectItem>
               {TYPES.map((t)=> (<SelectItem key={t} value={t}>{t[0].toUpperCase()+t.slice(1)}</SelectItem>))}
             </SelectGroup>
           </SelectContent>
@@ -68,7 +68,7 @@ export default function ArchivesPage() {
           <SelectTrigger className="md:col-span-4"><SelectValue placeholder="Monastery (All)" /></SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="">All</SelectItem>
+              <SelectItem value="all">All</SelectItem>
               {mons.map((m)=> (<SelectItem key={m.id} value={m.id}>{m.name}</SelectItem>))}
             </SelectGroup>
           </SelectContent>
