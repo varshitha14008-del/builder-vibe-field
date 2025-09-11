@@ -10,6 +10,7 @@ import { Layout } from "@/components/Layout";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Placeholder from "./pages/Placeholder";
+import ArchivesPage from "./pages/Archives";
 import MapPage from "./pages/Map";
 import ToursPage from "./pages/Tours";
 import AudioGuidePage from "./pages/AudioGuide";
