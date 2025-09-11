@@ -13,7 +13,7 @@ export const mockMonasteries: Monastery[] = [
 ];
 
 export const mockTours: Tour[] = [
-  { id: "rumtek-en", monasteryId: "rumtek", title: "Rumtek 360° Tour", languageCodes: ["en", "hi", "ne", "bo"], panoramaUrl: "https://pannellum.org/images/alma.jpg" },
+  { id: "rumtek-en", monasteryId: "rumtek", title: "Rumtek 360° Tour", languageCodes: ["en", "hi", "ne", "bo"], panoramaUrl: "https://www.google.com/maps/embed?pb=!3m2!1sen!2sin!4v1757571469780!5m2!1sen!2sin!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJQ0VndFRIUmc.!2m2!1d27.28862027053181!2d88.56148053028257!3f130.1551!4f0!5f0.7820865974627469" },
   { id: "pemayangtse-en", monasteryId: "pemayangtse", title: "Pemayangtse 360° Tour", languageCodes: ["en", "hi", "ne", "bo"], panoramaUrl: "https://pannellum.org/images/cerro-toco-0.jpg" },
   { id: "enchey-en", monasteryId: "enchey", title: "Enchey 360° Tour", languageCodes: ["en", "hi", "ne", "bo"], panoramaUrl: "https://pannellum.org/images/alma.jpg" },
   { id: "tashiding-en", monasteryId: "tashiding", title: "Tashiding 360° Tour", languageCodes: ["en", "hi", "ne", "bo"], panoramaUrl: "https://pannellum.org/images/cerro-toco-0.jpg" },
