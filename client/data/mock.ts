@@ -20,7 +20,7 @@ export const mockTours: Tour[] = [
   { id: "ralang-en", monasteryId: "ralang", title: "Ralang 360° Tour", languageCodes: ["en", "hi", "ne", "bo"], panoramaUrl: "https://pannellum.org/images/alma.jpg" },
   { id: "phodong-en", monasteryId: "phodong", title: "Phodong 360° Tour", languageCodes: ["en", "hi", "ne", "bo"], panoramaUrl: "https://pannellum.org/images/cerro-toco-0.jpg" },
   { id: "phensang-en", monasteryId: "phensang", title: "Phensang 360° Tour", languageCodes: ["en", "hi", "ne", "bo"], panoramaUrl: "https://pannellum.org/images/alma.jpg" },
-  { id: "lingdum-en", monasteryId: "lingdum", title: "Lingdum (Ranka) 360° Tour", languageCodes: ["en", "hi", "ne", "bo"], panoramaUrl: "https://pannellum.org/images/cerro-toco-0.jpg" },
+  { id: "lingdum-en", monasteryId: "lingdum", title: "Lingdum (Ranka) 360° Tour", languageCodes: ["en", "hi", "ne", "bo"], panoramaUrl: "https://youtu.be/gpZMxnrKXUg?si=SYGzCl4msURoPve5" },
   { id: "dubdi-en", monasteryId: "dubdi", title: "Dubdi 360° Tour", languageCodes: ["en", "hi", "ne", "bo"], panoramaUrl: "https://pannellum.org/images/alma.jpg" },
 ];
 
