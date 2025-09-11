@@ -16,6 +16,8 @@ export interface Monastery {
   lat?: number;
   lng?: number;
   heroImageUrl?: string;
+  description?: string;
+  wikiUrl?: string;
 }
 
 export interface Tour {
