@@ -58,7 +58,7 @@ const archives: ArchiveItem[] = [
     type: "photo",
     monasteryId: "phodong",
     thumbnailUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Elevated_view_of_Phodang_%22Karma_Thubten_Tashi_ChoKhorling%22_Monastery_at_Phodong%2C_North_Sikkim%2C_India_01.jpg",
-    imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Elevated_view_of_Phodang_%22Karma_Thubten_Tashi_ChoKHorling%22_Monastery_at_Phodong%2C_North_Sikkim%2C_India_01.jpg",
+    imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Elevated_view_of_Phodang_%22Karma_Thubten_Tashi_ChoKhorling%22_Monastery_at_Phodong%2C_North_Sikkim%2C_India_01.jpg",
     description: "Phodong is a Karma Kagyu monastery north of Gangtok, associated with the Chogyal rulers. It is known for vibrant cham dances and historic murals.",
     sourceUrl: "https://en.wikipedia.org/wiki/Phodong_Monastery"
   },
