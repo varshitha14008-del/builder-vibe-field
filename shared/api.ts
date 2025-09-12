@@ -35,6 +35,9 @@ export interface ArchiveItem {
   type: "manuscript" | "mural" | "thangka" | "audio" | "video" | "photo" | "document";
   monasteryId?: string;
   thumbnailUrl?: string;
+  imageUrl?: string;
+  description?: string;
+  sourceUrl?: string;
 }
 
 export interface CulturalEvent {
