@@ -78,9 +78,13 @@ export default function ArchivesPage() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map((it) => (
           <button key={it.id} className="group text-left overflow-hidden rounded-xl border border-border bg-card shadow-sm focus:outline-none focus:ring-2 focus:ring-ring" onClick={()=> { setActive(it); setOpen(true); }}>
-            <div className="h-40 bg-gradient-to-br from-secondary to-background grid place-items-center">
-              <div className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">{monName(it.monasteryId)}</div>
-            </div>
+            {it.thumbnailUrl ? (
+              <img src={it.thumbnailUrl} alt={it.title} className="h-40 w-full object-cover" loading="lazy" />
+            ) : (
+              <div className="h-40 bg-gradient-to-br from-secondary to-background grid place-items-center">
+                <div className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">{monName(it.monasteryId)}</div>
+              </div>
+            )}
             <div className="p-4 space-y-1">
               <div className="flex items-center gap-2">
                 <TypeBadge type={it.type} />
