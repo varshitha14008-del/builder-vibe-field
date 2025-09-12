@@ -91,6 +91,36 @@ const archives: ArchiveItem[] = [
     imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Dubdi_Monastery_4.jpg",
     description: "Dubdi at Yuksom (1701) is Sikkim’s oldest monastery, founded soon after the establishment of the kingdom. It remains central to the state’s early religious history.",
     sourceUrl: "https://en.wikipedia.org/wiki/Dubdi_Monastery"
+  },
+  {
+    id: "folio-ka",
+    title: "Palm-leaf Manuscript Folio (Prajñāpāramitā)",
+    type: "manuscript",
+    monasteryId: "pemayangtse",
+    thumbnailUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/MET_DP238210.jpg",
+    imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/MET_DP238210.jpg",
+    description: "Illustrated folio from the Aṣṭasāhasrikā Prajñāpāramitā, a Mahāyāna scripture copied on palm leaves. Such manuscripts travelled across the eastern Himalaya and influenced monastic learning in Sikkim.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Prajnaparamita_in_8,000_Lines"
+  },
+  {
+    id: "thangka-guru",
+    title: "Thangka of Guru Rinpoche (Padmasambhava)",
+    type: "thangka",
+    monasteryId: "rumtek",
+    thumbnailUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Painting_of_Padmasambhava%2C_from_Bhutan%2C_ca.1692%E2%80%9393.jpg",
+    imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Painting_of_Padmasambhava%2C_from_Bhutan%2C_ca.1692%E2%80%9393.jpg",
+    description: "Thangka icon of Padmasambhava, revered as Guru Rinpoche in the Himalayas. His teachings underpin Nyingma and Kagyu practices followed in Sikkim’s monasteries, including Rumtek.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Padmasambhava"
+  },
+  {
+    id: "wheel-life",
+    title: "Mural: Bhavachakra (Wheel of Life)",
+    type: "mural",
+    monasteryId: "enchey",
+    thumbnailUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Wheel_of_Life.jpg",
+    imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Wheel_of_Life.jpg",
+    description: "The Bhavachakra diagram shows the cycle of rebirth held by Yama, illustrating karmic causation and the path to liberation—a common didactic mural in Himalayan monasteries.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Bhavachakra"
   }
 ];
 
