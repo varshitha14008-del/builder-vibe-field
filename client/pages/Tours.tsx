@@ -179,7 +179,6 @@ export default function ToursPage() {
                   <div className="flex items-center justify-between gap-2">
                     <div>
                       <div className="font-semibold text-sm">{t.title}</div>
-                      <div className="text-xs text-foreground/70">Languages: {t.languageCodes.join(", ").toUpperCase()}</div>
                     </div>
                     {hasScene(t.id) ? (
                       <Button size="sm" onClick={()=> setCurrentId(t.id)}>View</Button>
