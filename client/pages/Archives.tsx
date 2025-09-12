@@ -107,9 +107,14 @@ export default function ArchivesPage() {
                 <TypeBadge type={active.type} />
                 {active.monasteryId ? <Badge variant="outline">{monName(active.monasteryId)}</Badge> : null}
               </div>
-              <div className="rounded-lg border border-border bg-background p-4 text-sm text-foreground/70">
-                This record is part of the Sikkim monastic archive. High-resolution media and metadata fields (script, date, material, dimensions, provenance) can be added via the CMS.
-              </div>
+              {active.imageUrl || active.thumbnailUrl ? (
+                <img src={active.imageUrl || active.thumbnailUrl} alt={active.title} className="w-full rounded-lg border border-border" />
+              ) : null}
+              {active.description ? (
+                <div className="rounded-lg border border-border bg-background p-4 text-sm text-foreground/80">
+                  {active.description}
+                </div>
+              ) : null}
               <div className="flex justify-end">
                 <Button variant="outline" onClick={()=> setOpen(false)}>Close</Button>
               </div>
