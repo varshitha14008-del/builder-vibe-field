@@ -115,7 +115,13 @@ export default function ArchivesPage() {
                   {active.description}
                 </div>
               ) : null}
-              <div className="flex justify-end">
+              <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-foreground/70">
+                <div className="space-x-2">
+                  {active.sourceUrl ? (<a href={active.sourceUrl} target="_blank" rel="noreferrer" className="text-primary hover:underline">Source</a>) : null}
+                  {active.monasteryId ? (
+                    (()=>{ const m = mons.find(m=>m.id===active.monasteryId); return m?.wikiUrl ? <a href={m.wikiUrl} target="_blank" rel="noreferrer" className="text-primary hover:underline">About {m.name}</a> : null; })()
+                  ) : null}
+                </div>
                 <Button variant="outline" onClick={()=> setOpen(false)}>Close</Button>
               </div>
             </div>
